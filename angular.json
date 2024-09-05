@@ -50,12 +50,36 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "define": {
+                "APP_KEY": "'app-key-value-for-production'"
+              }
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "define": {
+                "APP_KEY": "'app-key-value-for-development'"
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
+            },
+            "staging": {
+              "define": {
+                "APP_KEY": "'app-key-value-for-staging'"
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
+
             }
           },
           "defaultConfiguration": "production"
@@ -68,6 +92,9 @@
             },
             "development": {
               "buildTarget": "manage-env-files:build:development"
+            },
+            "staging": {
+              "buildTarget": "manage-env-files:build:staging"
             }
           },
           "defaultConfiguration": "development"
